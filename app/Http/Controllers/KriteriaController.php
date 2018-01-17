@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Individu;
+use App\Kriteria;
 use DataTables;
-
 use Validator;
 
-class IndividuController extends Controller
+class KriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +17,12 @@ class IndividuController extends Controller
 
     public function listData()
     {
-        $individu = Individu::all();
+        $kriteria = Kriteria::all();
 
         
         $no = 0;
         $data = array();
-        foreach($individu as $list){
+        foreach($kriteria as $list){
           
           $row = array();
         
@@ -51,7 +50,7 @@ class IndividuController extends Controller
 
     public function index()
     {
-        return view('individu.index');
+        return view('kriteria.index');
     }
 
     /**
@@ -72,7 +71,7 @@ class IndividuController extends Controller
      */
     public function store(Request $request)
     {
-         $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
            
             'nama'=> 'required',
         ],[
@@ -86,9 +85,9 @@ class IndividuController extends Controller
             return response()->json($validator->errors());
                   
             }else{
-                $individu = new Individu();
-                $individu->nama= $request->nama;
-                $individu->save();
+                $kriteria = new Kriteria();
+                $kriteria->nama= $request->nama;
+                $kriteria->save();
                 return response()->json(['message'=>'success']);  
             }
     }
@@ -112,9 +111,9 @@ class IndividuController extends Controller
      */
     public function edit($id)
     {
-        $individu = Individu::find($id);
+        $kriteria = Kriteria::find($id);
         
-        return response()->json($individu);
+        return response()->json($kriteria);
     }
 
     /**
@@ -126,7 +125,7 @@ class IndividuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $individu = Individu::find($id);
+        $kriteria = Kriteria::find($id);
         
         $validator = Validator::make($request->all(), [
             'nama'=> 'required',
@@ -140,12 +139,10 @@ class IndividuController extends Controller
             return response()->json($validator->errors());
         }
         else{
-           
-            
             
            
-            $individu->nama= $request->nama;
-            $individu->update();
+            $kriteria->nama= $request->nama;
+            $kriteria->update();
             return response()->json(['message'=>'success']);
         }
     }
@@ -158,9 +155,9 @@ class IndividuController extends Controller
      */
     public function destroy($id)
     {
-        $individu = Individu::find($id);
+        $kriteria = Kriteria::find($id);
         
-        $individu->delete();
+        $kriteria->delete();
         return response()->json(['message' => 'success']);
     }
 }

@@ -2,8 +2,6 @@
 
 
 @section('content')
-
-
  <div class="x_panel">
         <div class="x_title">
             <h2>
@@ -29,7 +27,9 @@
                         <thead>
                          <tr role="row">
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 303px;">No</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama Individu</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama Parameter</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nilai</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Id Sub Kriteria</th>
                              <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
                          </tr>
                         </thead>
@@ -38,7 +38,7 @@
 
                 </div>
             </div>
-             @include('individu.modal')
+             @include('parameter_sub_kriteria.modal')
 
      
 @endsection
@@ -54,7 +54,7 @@ $(function(){
 table = $('.table').DataTable({
      "processing" : true,
      "ajax" : {
-       "url" : "{{ url('individudata') }}",
+       "url" : "{{ url('parameter_sub_kriteriadata') }}",
        "type" : "GET"
      }
    });
@@ -77,8 +77,8 @@ table = $('.table').DataTable({
         
         var id = $('#id').val();
 
-         if(save_method == "add") url = "{{url('individu')}}";
-         else url = "individu/"+id;
+         if(save_method == "add") url = "{{url('parameter_sub_kriteria')}}";
+         else url = "parameter_sub_kriteria/"+id;
          
          $.ajax({
             url : url,
@@ -138,7 +138,7 @@ function edit(id){
    $('.form-group').removeClass('has-error');
    $('.help-block').empty();
    $.ajax({
-     url : "individu/"+id+"/edit",
+     url : "parameter_sub_kriteria/"+id+"/edit",
      type : "GET",
      dataType : "JSON",
      success : function(data){
@@ -146,7 +146,9 @@ function edit(id){
        $('.modal-title').text('Edit Data');
        
        $('#id').val(data.id);
-       $('#nama').val(data.nama);
+       $('#nama_parameter').val(data.nama_parameter);
+       $('#nilai').val(data.nilai);
+       $('#id_subkriteria').val(data.id_subkriteria);
        
        
      },
@@ -177,7 +179,7 @@ function delete_merk(id)
     if (result.value) {
     
             $.ajax({
-                url : "individu/"+id,
+                url : "parameter_sub_kriteria/"+id,
                 type: "POST",
                 data : {'_method' : 'DELETE', '_token' : $('meta[name=csrf-token]').attr('content')},
                 success: function(data)

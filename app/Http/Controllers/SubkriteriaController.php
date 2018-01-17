@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Individu;
+use App\Kriteria;
+use App\Sub_kriteria;
 use DataTables;
-
 use Validator;
+use DB;
 
-class IndividuController extends Controller
+class SubkriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,22 +19,28 @@ class IndividuController extends Controller
 
     public function listData()
     {
-        $individu = Individu::all();
+        //$sub_kriteria = Sub_kriteria::all();
+
+        $sub_kriteria = DB::table('sub_kriteria')
+                ->join('kriteria', 'sub_kriteria.id_kriteria', '=', 'kriteria.id')
+                ->select('sub_kriteria.id AS subandkriteria1','sub_kriteria.nama AS subandkriteria','kriteria.id','kriteria.nama')
+                ->get();
 
         
-        $no = 0;
+        $no = 1;
         $data = array();
-        foreach($individu as $list){
+        foreach($sub_kriteria as $list){
           
           $row = array();
         
          
           $row[] = $no++;
+          $row[] = $list->subandkriteria;
           $row[] = $list->nama;
           
           $row[] = "<div align='center'>
-          <button id='btn-ubah' type='button' onclick='edit(" .$list->id. ")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></button>
-         <button id='btn-ubah' type='button' onclick='delete_merk(" .$list->id. ")' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></button>
+          <button id='btn-ubah' type='button' onclick='edit(" .$list->subandkriteria1. ")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></button>
+         <button id='btn-ubah' type='button' onclick='delete_merk(" .$list->subandkriteria1. ")' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></button>
         </div>";
           
           /*$row[] = "<div class='btn-group'>
@@ -44,14 +51,15 @@ class IndividuController extends Controller
         }
     
         return DataTables::of($data)->escapeColumns([])->make(true);
-        //return response()->json($data[0]);
+        //return response()->json($data);
 
     }
 
-
     public function index()
     {
-        return view('individu.index');
+        $sub_kriteria = Kriteria::all();
+
+        return view('sub_kriteria.index', ['sub_kriteria'=>$sub_kriteria]);
     }
 
     /**
@@ -72,9 +80,10 @@ class IndividuController extends Controller
      */
     public function store(Request $request)
     {
-         $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
            
-            'nama'=> 'required',
+            'nama'          => 'required',
+            'id'   => 'required',
         ],[
         
                 
@@ -86,9 +95,10 @@ class IndividuController extends Controller
             return response()->json($validator->errors());
                   
             }else{
-                $individu = new Individu();
-                $individu->nama= $request->nama;
-                $individu->save();
+                $sub_kriteria = new Sub_kriteria();
+                $sub_kriteria->nama          =   $request->nama;
+                $sub_kriteria->id_kriteria   =   $request->id;
+                $sub_kriteria->save();
                 return response()->json(['message'=>'success']);  
             }
     }
@@ -112,9 +122,9 @@ class IndividuController extends Controller
      */
     public function edit($id)
     {
-        $individu = Individu::find($id);
+        $sub_kriteria = Sub_kriteria::find($id);
         
-        return response()->json($individu);
+        return response()->json($sub_kriteria);
     }
 
     /**
@@ -126,26 +136,26 @@ class IndividuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $individu = Individu::find($id);
+        $sub_kriteria = Sub_kriteria::find($id);
         
         $validator = Validator::make($request->all(), [
-            'nama'=> 'required',
+            'nama' => 'required',
+            'id'   => 'required',
         ],[
         
                
             
         ]);
 
-        if($validator->fails()){
+        if($validator->fails())
+        {
             return response()->json($validator->errors());
         }
-        else{
-           
-            
-            
-           
-            $individu->nama= $request->nama;
-            $individu->update();
+        else
+        {
+            $sub_kriteria->nama         = $request->nama;
+            $sub_kriteria->id_kriteria  = $request->id;
+            $sub_kriteria->update();
             return response()->json(['message'=>'success']);
         }
     }
@@ -158,9 +168,9 @@ class IndividuController extends Controller
      */
     public function destroy($id)
     {
-        $individu = Individu::find($id);
+        $sub_kriteria = Sub_kriteria::find($id);
         
-        $individu->delete();
+        $sub_kriteria->delete();
         return response()->json(['message' => 'success']);
     }
 }

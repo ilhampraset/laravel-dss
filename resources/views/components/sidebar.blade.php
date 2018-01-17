@@ -15,7 +15,9 @@
 			                <ul class="nav side-menu">
 			                  <li><a href="{{url('dashboard')}}"><i class="fa fa-home"></i> Dashboard </a></li>
 			                  <li><a href="{{url('individu')}}"><i class="fa fa-home"></i> Individu</a></li>
-			                  
+			                  <li><a href="{{url('kriteria')}}"><i class="fa fa-home"></i> Kriteria</a></li>
+			                  <li><a href="{{url('sub_kriteria')}}"><i class="fa fa-home"></i> Sub Kriteria</a></li>
+			                  <li><a href="{{url('parameter_sub_kriteria')}}"><i class="fa fa-home"></i> Parameter Sub Kriteria</a></li>
 			                </ul>
 			              </div>
 			         

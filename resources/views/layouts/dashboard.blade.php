@@ -11,9 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
   
     <!-- Font Awesome -->
 
@@ -24,7 +25,7 @@
 
     <!-- Custom Theme Style -->
     <link href="assets/build/css/custom.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+   
     @yield('css')
 </head>
   <body class="nav-md">
@@ -56,6 +57,7 @@
 
        <script src="{{ asset('js/app.js') }}"></script>
        <script src="assets/build/js/custom.min.js"></script>
+       <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
           
         @yield('js')
 
