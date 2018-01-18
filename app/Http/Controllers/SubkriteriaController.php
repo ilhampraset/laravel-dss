@@ -38,10 +38,10 @@ class SubkriteriaController extends Controller
           $row[] = $list->subandkriteria;
           $row[] = $list->nama;
           
-          $row[] = "<div align='center'>
-          <button id='btn-ubah' type='button' onclick='edit(" .$list->subandkriteria1. ")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></button>
-         <button id='btn-ubah' type='button' onclick='delete_merk(" .$list->subandkriteria1. ")' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></button>
-        </div>";
+           $row[] = "<div align='center'>
+            <button id='btn-ubah' type='button' onclick='edit(" .$list->subandkriteria1. ")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></button>
+            <button id='btn-ubah' type='button' onclick='delete_merk(" .$list->subandkriteria1. ")' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></button>
+                    </div>";
           
           /*$row[] = "<div class='btn-group'>
                    <a onclick='editForm(".$list->id_supplier.")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></a>
@@ -82,8 +82,8 @@ class SubkriteriaController extends Controller
     {
         $validator = Validator::make($request->all(), [
            
-            'nama'          => 'required',
-            'id'   => 'required',
+            'nama' => 'required',
+            'id_kriteria1'   => 'required',
         ],[
         
                 
@@ -97,7 +97,7 @@ class SubkriteriaController extends Controller
             }else{
                 $sub_kriteria = new Sub_kriteria();
                 $sub_kriteria->nama          =   $request->nama;
-                $sub_kriteria->id_kriteria   =   $request->id;
+                $sub_kriteria->id_kriteria   =   $request->id_kriteria1;
                 $sub_kriteria->save();
                 return response()->json(['message'=>'success']);  
             }
@@ -139,8 +139,8 @@ class SubkriteriaController extends Controller
         $sub_kriteria = Sub_kriteria::find($id);
         
         $validator = Validator::make($request->all(), [
-            'nama' => 'required',
-            'id'   => 'required',
+            'nama'           => 'required',
+            'id_kriteria1'   => 'required',
         ],[
         
                
@@ -154,7 +154,7 @@ class SubkriteriaController extends Controller
         else
         {
             $sub_kriteria->nama         = $request->nama;
-            $sub_kriteria->id_kriteria  = $request->id;
+            $sub_kriteria->id_kriteria  = $request->id_kriteria1;
             $sub_kriteria->update();
             return response()->json(['message'=>'success']);
         }

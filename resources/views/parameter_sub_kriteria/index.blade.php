@@ -148,7 +148,7 @@ function edit(id){
        $('#id').val(data.id);
        $('#nama_parameter').val(data.nama_parameter);
        $('#nilai').val(data.nilai);
-       $('#id_subkriteria').val(data.id_subkriteria);
+       $('#id_subkriteria1').val(data.id_subkriteria);
        
        
      },

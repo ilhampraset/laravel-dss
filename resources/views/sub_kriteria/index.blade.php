@@ -130,7 +130,15 @@ function add()
     $('#modal-tambah').modal('show');
 }
 
-function edit(id){
+//     $('#tabel-data').on('click','#btn-ubah',function(){
+//     $('#nama').val($(this).data('subandkriteria'));
+//     $('#id_kriteria1').val($(this).data('id_kriteria')).change();
+//     $('#modal-tambah').modal('show');
+// });
+
+
+function edit(id)
+{
    save_method = "edit";
    $('input[name=_method]').val('PATCH');
    //$('#form-tambah')[0].reset();
@@ -146,7 +154,7 @@ function edit(id){
        
        $('#id').val(data.id);
        $('#nama').val(data.nama);
-       $('#id_kriteria').val(data.id_kriteria);
+       $('#id_kriteria1').val(data.id_kriteria);
        
        
      },
@@ -154,10 +162,6 @@ function edit(id){
        swal('Oops...','Gagal Menampilkan Data!','error');
      }
    });
-
-
-
- 
 }
 
 function delete_merk(id)

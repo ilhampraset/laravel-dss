@@ -19,7 +19,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 col-sm-4 col-xs-12 control-label">Id Kriteria :</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <select name="id" class="form-control" id="id">
+                                    <select id="id_kriteria1" name="id_kriteria1" class="form-control">
                                         @foreach($sub_kriteria as $item)
                                             <option value="{{$item->id}}">{{$item->nama}}</option>
                                         @endforeach

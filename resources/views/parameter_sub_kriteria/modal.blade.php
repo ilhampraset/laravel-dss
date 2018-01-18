@@ -28,9 +28,9 @@
                             <div class="form-group">
                                 <label class="col-md-4 col-sm-4 col-xs-12 control-label">Id Sub Kriteria :</label>
                                 <div class="col-md-8 col-sm-8 col-xs-12">
-                                    <select id="id_kriteria" name="id_kriteria" class="form-control">
+                                    <select id="id_subkriteria1" name="id_subkriteria1" class="form-control">
                                         @foreach($parameter_sub_kriteria as $item)
-                                            <option value="{{$item->id_kriteria}}">{{$item->nama}}</option>
+                                            <option value="{{$item->id}}">{{$item->nama}}</option>
                                         @endforeach
                                     </select>
                                 </div>

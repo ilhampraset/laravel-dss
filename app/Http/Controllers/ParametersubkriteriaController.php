@@ -38,6 +38,12 @@ class ParametersubkriteriaController extends Controller
           $row[] = $list->prmsubandkriteria;
           $row[] = $list->nilai;
           $row[] = $list->nama;
+
+        //   $row[] = "<div align='center'>
+        //   <button id='btn-ubah' type='button' class='btn btn-warning btn-xs' data-subandkriteria='" . $list->subandkriteria . "'
+        //   data-nama='" . $list->nama . "' data-id_kriteria='". $list->id ."'><i class='fa fa-edit'></i></button>
+        //  <button id='btn-ubah' type='button' onclick='delete_merk(" .$list->subandkriteria1. ")' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></button>
+        // </div>";
           
           $row[] = "<div align='center'>
             <button id='btn-ubah' type='button' onclick='edit(" .$list->prmsubandkriteria1. ")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></button>
@@ -85,7 +91,7 @@ class ParametersubkriteriaController extends Controller
            
             'nama_parameter'    => 'required',
             'nilai'             => 'required',
-            'id_kriteria'       => 'required',
+            'id_subkriteria1'       => 'required',
         ],[
         
                 
@@ -100,7 +106,7 @@ class ParametersubkriteriaController extends Controller
                 $parameter_sub_kriteria = new Parameter_sub_kriteria();
                 $parameter_sub_kriteria->nama_parameter =   $request->nama_parameter;
                 $parameter_sub_kriteria->nilai          =   $request->nilai;
-                $parameter_sub_kriteria->id_subkriteria =   $request->id_kriteria;
+                $parameter_sub_kriteria->id_subkriteria =   $request->id_subkriteria1;
                 $parameter_sub_kriteria->save();
                 return response()->json(['message'=>'success']);  
             }
@@ -145,7 +151,7 @@ class ParametersubkriteriaController extends Controller
            
             'nama_parameter'    =>  'required',
             'nilai'             =>  'required',
-            'id_kriteria'       =>  'required',
+            'id_subkriteria1'       =>  'required',
         ],[
         
                 
@@ -161,7 +167,7 @@ class ParametersubkriteriaController extends Controller
         {
                 $parameter_sub_kriteria->nama_parameter =   $request->nama_parameter;
                 $parameter_sub_kriteria->nilai          =   $request->nilai;
-                $parameter_sub_kriteria->id_subkriteria =   $request->id_kriteria;
+                $parameter_sub_kriteria->id_subkriteria =   $request->id_subkriteria1;
                 $parameter_sub_kriteria->update();
                 return response()->json(['message'=>'success']);  
         }
