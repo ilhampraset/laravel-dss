@@ -139,11 +139,7 @@ class IndividuController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors());
         }
-        else{
-           
-            
-            
-           
+        else{  
             $individu->nama= $request->nama;
             $individu->update();
             return response()->json(['message'=>'success']);

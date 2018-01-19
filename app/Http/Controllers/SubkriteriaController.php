@@ -24,6 +24,7 @@ class SubkriteriaController extends Controller
         $sub_kriteria = DB::table('sub_kriteria')
                 ->join('kriteria', 'sub_kriteria.id_kriteria', '=', 'kriteria.id')
                 ->select('sub_kriteria.id AS subandkriteria1','sub_kriteria.nama AS subandkriteria','kriteria.id','kriteria.nama')
+                ->orderBy('subandkriteria1')
                 ->get();
 
         
@@ -139,6 +140,7 @@ class SubkriteriaController extends Controller
         $sub_kriteria = Sub_kriteria::find($id);
         
         $validator = Validator::make($request->all(), [
+
             'nama'           => 'required',
             'id_kriteria1'   => 'required',
         ],[

@@ -24,6 +24,7 @@ class ParametersubkriteriaController extends Controller
         $parameter_sub_kriteria = DB::table('parameter_sub_kriteria')
                 ->join('sub_kriteria', 'parameter_sub_kriteria.id_subkriteria', '=', 'sub_kriteria.id')
                 ->select('parameter_sub_kriteria.id AS prmsubandkriteria1','parameter_sub_kriteria.nama_parameter AS prmsubandkriteria','parameter_sub_kriteria.nilai','sub_kriteria.id','sub_kriteria.nama','sub_kriteria.id_kriteria')
+                ->orderBy('prmsubandkriteria1')
                 ->get();
 
         
@@ -33,7 +34,6 @@ class ParametersubkriteriaController extends Controller
           
           $row = array();
         
-         
           $row[] = $no++;
           $row[] = $list->prmsubandkriteria;
           $row[] = $list->nilai;
@@ -91,7 +91,7 @@ class ParametersubkriteriaController extends Controller
            
             'nama_parameter'    => 'required',
             'nilai'             => 'required',
-            'id_subkriteria1'       => 'required',
+            'id_subkriteria1'   => 'required',
         ],[
         
                 
@@ -151,7 +151,7 @@ class ParametersubkriteriaController extends Controller
            
             'nama_parameter'    =>  'required',
             'nilai'             =>  'required',
-            'id_subkriteria1'       =>  'required',
+            'id_subkriteria1'   =>  'required',
         ],[
         
                 
@@ -165,11 +165,11 @@ class ParametersubkriteriaController extends Controller
         }
         else
         {
-                $parameter_sub_kriteria->nama_parameter =   $request->nama_parameter;
-                $parameter_sub_kriteria->nilai          =   $request->nilai;
-                $parameter_sub_kriteria->id_subkriteria =   $request->id_subkriteria1;
-                $parameter_sub_kriteria->update();
-                return response()->json(['message'=>'success']);  
+            $parameter_sub_kriteria->nama_parameter =   $request->nama_parameter;
+            $parameter_sub_kriteria->nilai          =   $request->nilai;
+            $parameter_sub_kriteria->id_subkriteria =   $request->id_subkriteria1;
+            $parameter_sub_kriteria->update();
+            return response()->json(['message'=>'success']);  
         }
     }
 
