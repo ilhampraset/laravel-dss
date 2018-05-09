@@ -28,8 +28,8 @@
                          <tr role="row">
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 303px;">No</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama Parameter</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Sub Kriteria</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nilai</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Id Sub Kriteria</th>
                              <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
                          </tr>
                         </thead>

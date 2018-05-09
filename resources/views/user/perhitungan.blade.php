@@ -1,50 +1,72 @@
 @extends('layouts.dashboard')
 
+@section('css')
+
+<style type="text/css">
+    
+    th {
+        text-align: center;
+    }
+
+</style>
+
+@endsection
 
 @section('content')
 
 
+<div class="x_panel">
+     <h1 style="text-align: center;">Sistem Pendukung Keputusan Investasi Pendirian Coffee Shop</h1> 
+</div>
+
  <div class="x_panel">
+   
         <div class="x_title">
             <h2>
                 <a href="">
                     <i class="fa fa-home"></i>
                 </a>  
                 <a href="">
-                    Data Layanan
+                  
                 </a>
+
+               
+
             </h2>
+            
             <ul class="nav navbar-right panel_toolbox">
-                
-                    <li>
-                       
-                        <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah</button>
-                        
-                    </li>
-                   
-                </ul>
-                <div class="clearfix"></div>
-        </div>
-                <div class="x_content">
-                    <table id="tabel-data" class="table table-bordered table-striped table-hover dataTable no-footer" role="grid" aria-describedby="tabel-data_info">
-                        <thead>
-                         <tr role="row">
-                            <th class="sorting_disabled" rowspan="1" colspan="1">No</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Kriteria</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Sub Kriteria</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Parameter</th>
+                <li>
+                    <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah</button>
+                </li>
+            </ul>
 
-                             <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
-                         </tr>
-                        </thead>
-                    </table>
               
-
+                <div class="clearfix"></div>
                 </div>
-            </div>
-             @include('individu.modal')
 
-     
+                <div class="x_content">
+                    
+                    
+
+                     <table id="tabel-data" class="table table-bordered table-striped table-hover dataTable no-footer" role="grid" aria-describedby="tabel-data_info" style="text-align: center; width: 100%;" >
+                            <thead>
+                             <tr role="row">
+                                <th class="sorting_disabled" rowspan="1" colspan="1"  style="width: 100px;">No</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama Lokasi</th>
+                                @foreach($kriteria as $kt)
+                                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">{{$kt->nama}}</th>
+                                @endforeach
+                                <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
+                             </tr>
+                            </thead>
+                           
+                    </table>
+                  
+                </div>
+
+                @include('user.modal-input')
+        </div>
+                
 @endsection
 
 @section('js')
@@ -54,14 +76,19 @@
 
 
 var table, save_method;
+
 $(function(){
+
+
 table = $('.table').DataTable({
      "processing" : true,
      "ajax" : {
-       "url" : "{{ url('individudata') }}",
+       "url" : "{{ url('dataprofile') }}",
        "type" : "GET"
      }
    });
+
+/*table =  $('#table-data').DataTable();*/
 
     $("input").change(function(){
         $(this).parent().parent().removeClass('has-error');
@@ -76,13 +103,13 @@ table = $('.table').DataTable({
         $(this).next().empty();
     });
 
-  $('#form-tambah').on('submit', function(e){
+  $('#form-tambah').on('submitt', function(e){
        if(!e.isDefaultPrevented()){
         
         var id = $('#id').val();
 
-         if(save_method == "add") url = "{{url('individu')}}";
-         else url = "individu/"+id;
+         if(save_method == "add") url = "{{url('kriteria')}}";
+         else url = "kriteria/"+id;
          
          $.ajax({
             url : url,
@@ -138,11 +165,11 @@ function add()
 function edit(id){
    save_method = "edit";
    $('input[name=_method]').val('PATCH');
-   //$('#form-tambah')[0].reset();
+   
    $('.form-group').removeClass('has-error');
    $('.help-block').empty();
    $.ajax({
-     url : "individu/"+id+"/edit",
+     url : "kriteria/"+id+"/edit",
      type : "GET",
      dataType : "JSON",
      success : function(data){
@@ -181,7 +208,7 @@ function delete_merk(id)
     if (result.value) {
     
             $.ajax({
-                url : "individu/"+id,
+                url : "kriteria/"+id,
                 type: "POST",
                 data : {'_method' : 'DELETE', '_token' : $('meta[name=csrf-token]').attr('content')},
                 success: function(data)
@@ -204,5 +231,3 @@ function delete_merk(id)
 
 </script>
 @endsection
-
-

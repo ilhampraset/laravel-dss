@@ -17,6 +17,7 @@ class ParametersubkriteriaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+   
     public function listData()
     {
         //$sub_kriteria = Sub_kriteria::all();
@@ -36,8 +37,8 @@ class ParametersubkriteriaController extends Controller
         
           $row[] = $no++;
           $row[] = $list->prmsubandkriteria;
-          $row[] = $list->nilai;
           $row[] = $list->nama;
+          $row[] = $list->nilai;
 
         //   $row[] = "<div align='center'>
         //   <button id='btn-ubah' type='button' class='btn btn-warning btn-xs' data-subandkriteria='" . $list->subandkriteria . "'

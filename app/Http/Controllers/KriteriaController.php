@@ -15,12 +15,14 @@ class KriteriaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+  
+
     public function listData()
     {
         $kriteria = Kriteria::all();
 
         
-        $no = 0;
+        $no = 1;
         $data = array();
         foreach($kriteria as $list){
           

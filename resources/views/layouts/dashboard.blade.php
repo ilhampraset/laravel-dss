@@ -18,20 +18,21 @@
   
     <!-- Font Awesome -->
 
-    <link href="assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url('assets/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     
 
 
 
     <!-- Custom Theme Style -->
-    <link href="assets/build/css/custom.min.css" rel="stylesheet">
+    <link href="{{ url('assets/build/css/custom.min.css')}}" rel="stylesheet">
    
     @yield('css')
 </head>
-  <body class="nav-md">
+  <body class="nav-sm">
     <div class="container body">
       <div class="main_container">
 
+ 
 
         <!--sidebar -->
           <!-- sidebar menu -->
@@ -44,7 +45,7 @@
        
 
 	   <div class="right_col" role="main">
-        
+       
     	    <div class="row">
 		        <div class="col-md-12 col-sm-12 col-xs-12">
 		          @yield('content')
@@ -56,7 +57,7 @@
       @endcomponent
 
        <script src="{{ asset('js/app.js') }}"></script>
-       <script src="assets/build/js/custom.min.js"></script>
+       <script src="{{ url('assets/build/js/custom.min.js') }}"></script>
        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
           
         @yield('js')

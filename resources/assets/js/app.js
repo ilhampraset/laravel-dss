@@ -17,6 +17,9 @@ window.swal = require('sweetalert2');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+Vue.component('modal', require('./components/Modal.vue'));
+Vue.component('t-head', require('./components/user-layout/Thead.vue'));
+
 const app = new Vue({
     el: '#app'
 });

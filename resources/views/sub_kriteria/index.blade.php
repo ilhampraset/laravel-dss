@@ -28,8 +28,9 @@
                          <tr role="row">
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 303px;">No</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Id Kriteria</th>
-                             <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nilai</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Kriteria</th>
+                            <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
                          </tr>
                         </thead>
                 </table>
@@ -154,6 +155,7 @@ function edit(id)
        
        $('#id').val(data.id);
        $('#nama').val(data.nama);
+       $('#nilai').val(data.nilai);
        $('#id_kriteria1').val(data.id_kriteria);
        
        
