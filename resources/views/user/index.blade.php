@@ -67,12 +67,12 @@ table = $('.table').DataTable({
         $(this).next().empty();
     });
 
-  $('#form-tambah').on('submitt', function(e){
+  $('#form-tambah').on('submit', function(e){
        if(!e.isDefaultPrevented()){
         
         var id = $('#id').val();
 
-         if(save_method == "add") url = "{{url('//kriteria')}}";
+         if(save_method == "add") url = "{{url('/simpan')}}";
          else url = "kriteria/"+id;
          
          $.ajax({

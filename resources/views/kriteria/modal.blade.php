@@ -17,6 +17,16 @@
                                 <span class="help-block"></span>
                             </div>
                         </div>
+                         <div class="form-group">
+                            <label class="col-md-4 col-sm-4 col-xs-12 control-label">faktor</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <select id="nama" name="faktor" class="required form-control input-xs" placeholder="Nama " type="text" >
+                                <option value="cf">Core Factor</option>
+                                <option value='sf'>Secondary Factor</option>
+                                </select> 
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

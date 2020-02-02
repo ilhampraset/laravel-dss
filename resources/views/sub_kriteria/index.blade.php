@@ -9,7 +9,7 @@
                     <i class="fa fa-home"></i>
                 </a>  
                 <a href="">
-                    Data Layanan
+                    Data Sub Kriteria
                 </a>
             </h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -27,7 +27,7 @@
                         <thead>
                          <tr role="row">
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 303px;">No</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Keterangan</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nilai</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Kriteria</th>
                             <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>

@@ -31,7 +31,8 @@ class KriteriaController extends Controller
          
           $row[] = $no++;
           $row[] = $list->nama;
-          
+          $row[] = $list->faktor;
+
           $row[] = "<div align='center'>
           <button id='btn-ubah' type='button' onclick='edit(" .$list->id. ")' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i></button>
          <button id='btn-ubah' type='button' onclick='delete_merk(" .$list->id. ")' class='btn btn-danger btn-xs'><i class='fa fa-trash-o'></i></button>
@@ -89,6 +90,7 @@ class KriteriaController extends Controller
             }else{
                 $kriteria = new Kriteria();
                 $kriteria->nama= $request->nama;
+                $kriteria->faktor= $request->faktor;
                 $kriteria->save();
                 return response()->json(['message'=>'success']);  
             }
@@ -144,6 +146,7 @@ class KriteriaController extends Controller
             
            
             $kriteria->nama= $request->nama;
+            $kriteria->faktor= $request->faktor;
             $kriteria->update();
             return response()->json(['message'=>'success']);
         }

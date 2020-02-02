@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-tambah">
-    <form id="form-tambah" data-parsley-validate method="POST" action="{{url('simpan')}}">
+    <form id="form-tambah" data-parsley-validate method="POST">
     {{ csrf_field() }} {{ method_field('POST') }}
         <div class="modal-dialog">
             <div class="modal-content">
@@ -11,6 +11,7 @@
                     <div class="form-horizontal">
                      <input id="id" name="id" type='hidden'>
                      <input id="user" name="user" type="hidden" value="{{Auth::user()->id}}">
+                        <input id="status" name="status" type="hidden" value='diinginkan'  >
                         <div class="form-group">
                             <label class="col-md-4 col-sm-4 col-xs-12 control-label">Nama Lokasi</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">

@@ -13,15 +13,25 @@ use App\Lib\ProfileMatching;
 |
 */
 
-//Route::get('hello', 'LatihanController@index');
 
-
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/teslib', function () {
+    $pf = new ProfileMatching(0.6, 0.4);
+    $pref = [5,4,5,4];
+    $pac = [[5,6,4,5], [3,4,5,6], [5,6,4,5], [3,6,3,5]];
+    
+    return response()->json(["result" => $pf->proces($pref, $pac)]);
 });
 
+Route::get('/', function () {
+    return view('index');
+});
 
+Route::get('/login2', function () {
+    return view('auth.login2');
+});
+Route::get('/register2', function () {
+    return view('auth.register2');
+});
 Auth::routes();
 
 
@@ -29,9 +39,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
 
-    Route::get('/', function() {
-        return view('dashboard.index');
-    });
+    // Route::get('/', function() {
+    //     return view('dashboard.index');
+    // });
 
      Route::get('/dashboard', function(){
         return view('dashboard.index');
@@ -55,14 +65,18 @@ Route::group(['middleware' => ['auth']], function() {
         return view('user/index');      
         })->middleware('role:user');
 
-    Route::get('/user/kriteria', function(){
-        return view('user/kriteria');      
-        })->middleware('role:user');
+    Route::get('/user/profile-acuan','FrontEndController@profileAcuan')->middleware('role:user');
 
-    Route::get('/user/data_dan_perhitungan', 'FrontEndController@index' )->middleware('role:user');
+    Route::get('/user/data-profile-diingikan', 'FrontEndController@index' )->middleware('role:user');
+    Route::get('/user/data_perangkingan', 'FrontEndController@perangkingan' )->middleware('role:user');
     Route::post('simpan', 'FrontEndController@save');
+    Route::post('simpan/{id}', 'FrontEndController@update');
+    Route::get('data-profile-diingikan/{id}/edit', 'FrontEndController@edit');
     Route::get('dataprofile', 'FrontEndController@getDataProfile');
-    Route::get('profile', 'FrontEndController@testGet');
+    Route::get('dataprofileacuan', 'FrontEndController@getDataProfileReference');
+    Route::get('profile', 'FrontEndController@getProfile');
+    Route::get('gapmapping', 'FrontEndController@gapMapping');
+    Route::get('resultprofilematching', 'FrontEndController@resultProfileMatching');
 });
 
 

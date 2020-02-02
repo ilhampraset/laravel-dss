@@ -26,9 +26,7 @@
                 <a href="">
                     <i class="fa fa-home"></i>
                 </a>  
-                <a href="">
-                  
-                </a>
+                 <a class="collapse-link">Data Profile</a>
 
                
 
@@ -36,8 +34,10 @@
             
             <ul class="nav navbar-right panel_toolbox">
                 <li>
-                    <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah</button>
+                    <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah Profile Coffee Shop</button>
                 </li>
+
+                <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
             </ul>
 
               
@@ -48,7 +48,7 @@
                     
                     
 
-                     <table id="tabel-data" class="table table-bordered table-striped table-hover dataTable no-footer" role="grid" aria-describedby="tabel-data_info" style="text-align: center; width: 100%;" >
+                     <table id="tabel-data" class="table table-responsive table-bordered table-striped table-hover dataTable no-footer" role="grid" aria-describedby="tabel-data_info" style="text-align: center; width: 100%; overflow-x:auto;" >
                             <thead>
                              <tr role="row">
                                 <th class="sorting_disabled" rowspan="1" colspan="1"  style="width: 100px;">No</th>
@@ -56,9 +56,15 @@
                                 @foreach($kriteria as $kt)
                                      <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">{{$kt->nama}}</th>
                                 @endforeach
+                                
                                 <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
                              </tr>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                </tr>
+                            </tbody>
                            
                     </table>
                   
@@ -66,7 +72,9 @@
 
                 @include('user.modal-input')
         </div>
-                
+
+        
+</div>          
 @endsection
 
 @section('js')
@@ -80,7 +88,7 @@ var table, save_method;
 $(function(){
 
 
-table = $('.table').DataTable({
+table = $('#tabel-data').DataTable({
      "processing" : true,
      "ajax" : {
        "url" : "{{ url('dataprofile') }}",
@@ -88,6 +96,21 @@ table = $('.table').DataTable({
      }
    });
 
+table2 = $('#tabel2').DataTable({
+     "processing" : true,
+     "ajax" : {
+       "url" : "{{ url('resultprofilematching') }}",
+       "type" : "GET"
+     }
+   });
+
+table2 = $('#tabel3').DataTable({
+     "processing" : true,
+     "ajax" : {
+       "url" : "{{ url('gapmapping') }}",
+       "type" : "GET"
+     }
+   });
 /*table =  $('#table-data').DataTable();*/
 
     $("input").change(function(){
@@ -103,12 +126,12 @@ table = $('.table').DataTable({
         $(this).next().empty();
     });
 
-  $('#form-tambah').on('submitt', function(e){
+  $('#form-tambah').on('submit', function(e){
        if(!e.isDefaultPrevented()){
         
         var id = $('#id').val();
 
-         if(save_method == "add") url = "{{url('kriteria')}}";
+         if(save_method == "add") url = "{{url('simpan')}}";
          else url = "kriteria/"+id;
          
          $.ajax({
@@ -130,8 +153,7 @@ table = $('.table').DataTable({
                 
                }
                else{
-                      
-                         
+                       
                         $.each( data, function( key, value ) {
                             
                    
@@ -164,12 +186,13 @@ function add()
 
 function edit(id){
    save_method = "edit";
+   let uri = "{{url('data-profile-diingikan/')}}"
    $('input[name=_method]').val('PATCH');
    
    $('.form-group').removeClass('has-error');
    $('.help-block').empty();
    $.ajax({
-     url : "kriteria/"+id+"/edit",
+     url : uri+"/"+id+"/edit",
      type : "GET",
      dataType : "JSON",
      success : function(data){
@@ -177,8 +200,9 @@ function edit(id){
        $('.modal-title').text('Edit Data');
        
        $('#id').val(data.id);
-       $('#nama').val(data.nama);
-       
+       $('#nama').val(data.nama_lokasi);
+        $('#nilai').val(data.nilai);
+        
        
      },
      error : function(){

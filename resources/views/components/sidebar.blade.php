@@ -6,16 +6,15 @@
 		            <ul class="nav side-menu">
 		            @role('admin')
 		              <li><a href="{{url('dashboard')}}"><i class="fa fa-home"></i> Dashboard </a></li>
-		              <li><a href="{{url('individu')}}"><i class="fa fa-home"></i> Individu</a></li>
 		              <li><a href="{{url('kriteria')}}"><i class="fa fa-home"></i> Kriteria</a></li>
 		              <li><a href="{{url('sub_kriteria')}}"><i class="fa fa-home"></i> Sub Kriteria</a></li>
-		              <li><a href="{{url('parameter_sub_kriteria')}}"><i class="fa fa-home"></i> Parameter Sub Kriteria</a></li>
 		             @endrole
 
 		              @role('user')
 		              <li><a href="{{url('user/home')}}"><i class="fa fa-home"></i> Dashboard </a></li>
-		              <li><a href="{{url('user/kriteria')}}"><i class="fa fa-home"></i> kriteria </a></li>
-		              <li><a href="{{url('user/data_dan_perhitungan')}}"><i class="fa fa-home"></i> Data dan Perhitungan </a></li>
+		              <li><a href="{{url('user/profile-acuan')}}"><i class="fa fa-home"></i> Data Profile Acuan </a></li>
+		              <li><a href="{{url('user/data-profile-diingikan')}}"><i class="fa fa-home"></i> Data Profile </a></li>
+		              <li><a href="{{url('user/data_perangkingan')}}"><i class="fa fa-home"></i> Perangkingan</a></li>
 		              @endrole
 
 		            </ul>
