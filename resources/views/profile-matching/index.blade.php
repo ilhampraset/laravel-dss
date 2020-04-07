@@ -15,9 +15,9 @@
 @section('content')
 
 
-<!-- <div class="x_panel">
-     <h1 style="text-align: center;">Sistem Pendukung Keputusan Investasi Pendirian Coffee Shop</h1>
-</div> -->
+<div class="x_panel">
+
+</div>
 
  <div class="x_panel">
 
@@ -34,7 +34,7 @@
 
             <ul class="nav navbar-right panel_toolbox">
                 <li>
-                    <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah Profile Coffee Shop</button>
+                    <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah Profile Matching</button>
                 </li>
 
                 <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
@@ -53,10 +53,8 @@
                              <tr role="row">
                                 <th class="sorting_disabled" rowspan="1" colspan="1"  style="width: 100px;">No</th>
 
-                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Alamat</th>
-                                @foreach($kriteria as $kt)
-                                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">{{$kt->nama}}</th>
-                                @endforeach
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama Coffeeshop</th>
+                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Nama Coffeeshop Acuan</th>
 
                                 <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
                              </tr>
@@ -71,7 +69,7 @@
 
                 </div>
 
-                @include('user.modal-input')
+                @include('profile-matching.modal-profile')
         </div>
 
 
@@ -86,13 +84,49 @@
 
 var table, save_method;
 
+function appendForm(arr){
+  let formdetail = `<div class="form-group" id="childDetail">
+      <label class="col-md-4 col-sm-4 col-xs-12 control-label">${arr[0]}</label>
+      <div class="col-md-8 col-sm-8 col-xs-12">
+          <textarea class="form-control" readonly>${arr[1]}</textarea
+      </div>
+  </div>`;
+
+  return formdetail
+}
 $(function(){
 
+
+$('#acuan').on('change', ()=>{
+  let id = $('#acuan').val()
+  $('#detailvalue').empty();
+
+  $.ajax({
+    url : "profile-acuan/"+id+"/detail",
+    type : "GET",
+    dataType : "JSON",
+    success : function(data){
+      for(let i=0;i<data.length;i++){
+          $('#detailvalue').append(appendForm([data[i].label, data[i].desc]));
+
+      }
+
+
+
+
+
+    },
+    error : function(e){
+      console.log(e)
+      //swal('Oops...','Gagal Menampilkan Data!','error');
+    }
+  });
+})
 
 table = $('#tabel-data').DataTable({
      "processing" : true,
      "ajax" : {
-       "url" : "{{ url('dataprofile') }}",
+       "url" : "{{ url('dataprofilematching') }}",
        "type" : "GET"
      }
    });
@@ -132,8 +166,8 @@ table2 = $('#tabel3').DataTable({
 
         var id = $('#id').val();
 
-         if(save_method == "add") url = "{{url('/profile-acuan')}}";
-         else url = "/profile-acuan/"+id;
+         if(save_method == "add") url = "{{url('/profile-matching')}}";
+         else url = "/profile-matching/"+id;
 
          $.ajax({
             url : url,
@@ -181,15 +215,19 @@ function add()
     $('input[name=_method]').val('POST');
     $('.form-group').removeClass('has-error');
     $('#form-tambah')[0].reset();
+    $('#detailvalue').empty();
     $('.help-block').empty();
     $('#modal-tambah').modal('show');
 }
-
+function detail_profile(id){
+  let url = '{{url('profile-matching')}}'
+  window.location.href = `${url}/${id}/detail`
+}
 function edit(id){
    save_method = "edit";
-   let uri = "{{url('data-profile-diingikan/')}}"
+   let uri = "{{url('profile-matching')}}"
    $('input[name=_method]').val('PATCH');
-
+   $('#detailvalue').empty();
    $('.form-group').removeClass('has-error');
    $('.help-block').empty();
    $.ajax({
@@ -201,13 +239,23 @@ function edit(id){
        $('.modal-title').text('Edit Data');
 
        $('#id').val(data.id);
-        $('#nama_coffeeshop').val(data.nama_coffeeshop);
-       $('#nama').val(data.nama_lokasi);
-        $('#nilai').val(data.nilai);
-        let len = $('select#nilai').length ;
-        for(let i=0;i<len;i++){
-          $('select#nilai').find(`option[value="${data.nilai[i]}"]`).prop('selected', true);
-        }
+       $('#nama_coffeeshop').val(data.nama_coffeeshop);
+       $('#acuan').find(`option[value="${data.id_acuan}"]`).prop('selected', true);
+
+       $.ajax({
+         url : "profile-acuan/"+data.id_acuan+"/detail",
+         type : "GET",
+         dataType : "JSON",
+         success : function(data){
+           for(let i=0;i<data.length;i++){
+               $('#detailvalue').append(appendForm([data[i].label, data[i].desc]));
+           }
+         },
+         error : function(e){
+           console.log(e)
+         }
+       });
+
      },
      error : function(){
        swal('Oops...','Gagal Menampilkan Data!','error');
@@ -236,15 +284,13 @@ function delete_merk(id)
     if (result.value) {
 
             $.ajax({
-                url : "kriteria/"+id,
+                url : "profile-matching/"+id,
                 type: "POST",
                 data : {'_method' : 'DELETE', '_token' : $('meta[name=csrf-token]').attr('content')},
                 success: function(data)
                 {
                     table.ajax.reload();
                     swal('Good job!','Berhasil Mengapus Data','success');
-
-
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {

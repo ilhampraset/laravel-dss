@@ -23,10 +23,10 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{asset('/css/style.css')}}" />
-	
+
 </head>
 <body>
-	
+
 	<!-- Header -->
 	<header id="header" class="transparent-navbar">
 		<!-- container -->
@@ -35,7 +35,7 @@
 			<div class="navbar-header">
 				<!-- Logo -->
 				<div class="navbar-brand">
-					<a class="logo" href="index.html">
+					<a class="logo" href="/">
 						<h1 class="logo-img" >SPKCOFFEESHOP</h1>
 						<h1 class="logo-alt-img" style="color: #fff;">SPKCOFFEESHOP</h1>
 						<!-- <img class="logo-img" src="./img/kkbrc-logo.png" alt="logo">
@@ -55,7 +55,7 @@
 			<!-- Navigation -->
 			<nav id="nav">
 				<ul class="main-nav nav navbar-nav navbar-right">
-					<li><a href="/home">Home</a></li>
+					<li><a href="/">Home</a></li>
 			        <li><a href="/login">Login</a></li>
 				</ul>
 			</nav>
@@ -81,7 +81,7 @@
 					<div class="col-md-8 col-md-offset-2">
 						<div class="home-content">
 							<h1>Sistem Pendukung Keputusan Pendirian Usaha Coffee  Shop</h1>
-							<h4 class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
+							<h4 class="lead">Aplikasi yang dapat membantu orang-orang yang akan dan sudah menjalankan usaha coffeeshop</h4>
 							<a href="login#signup" class="main-btn">Register</a>
 						</div>
 					</div>
@@ -93,16 +93,16 @@
 		</div>
 		<!-- /home wrapper -->
 	</div>
-	
+
 	<div id="app">
 		<judgesHome></judgesHome>
-		<sponsorhome></sponsorhome>
-		<prizehome></prizehome>	
+		<!-- <sponsorhome></sponsorhome>
+		<prizehome></prizehome>	 -->
 		<footer id="footer">
 			<footer-content/>
 		</footer>
 	</div>
-	
+
 	<!-- jQuery Plugins -->
 	<script src="{{asset('/js/jquery.min.js')}}"></script>
 	<script src="{{asset('/js/bootstrap.min.js')}}"></script>

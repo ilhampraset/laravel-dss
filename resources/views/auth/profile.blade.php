@@ -1,23 +1,9 @@
 @extends('layouts.dashboard')
 
-@section('css')
 
-<style type="text/css">
-
-    th {
-        text-align: center;
-    }
-
-</style>
-
-@endsection
 
 @section('content')
 
-
-<!-- <div class="x_panel">
-     <h1 style="text-align: center;">Sistem Pendukung Keputusan Investasi Pendirian Coffee Shop</h1>
-</div> -->
 
  <div class="x_panel">
 
@@ -26,57 +12,62 @@
                 <a href="">
                     <i class="fa fa-home"></i>
                 </a>
-                 <a class="collapse-link">Profile Matching</a>
-
-
-
+                <a href="">
+                    Profile Pengguna
+                </a>
             </h2>
-
-            <ul class="nav navbar-right panel_toolbox">
-                <li>
-                    <button type="button" id="btn-tambah" onclick='add()' class="btn btn-primary">Tambah Profile Coffee Shop</button>
-                </li>
-
-                <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
-            </ul>
-
 
                 <div class="clearfix"></div>
                 </div>
-
                 <div class="x_content">
+                <form id="form-tambah" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                  {{ csrf_field() }} {{ method_field('PATCH') }}
 
+                  <input type="hidden" name="id" id="id" value="{{$user[0]->id}}"/>
+                  <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama<span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 ">
+                      <input type="text" id="first-name" value="{{$user[0]->name}}" name="name" required="required" class="form-control ">
+                    </div>
+                  </div>
+                  <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Username<span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 ">
+                      <input type="text" id="first-name" value="{{$user[0]->username}}" name="username" required="required" class="form-control ">
+                    </div>
+                  </div>
+                  <div class="item form-group">
+                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Email <span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 ">
+                    <input type="text" id="last-name" value="{{$user[0]->email}}" name="email" required="required" class="form-control">
+                    </div>
+                  </div>
 
+                  <div class="item form-group">
+                    <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Password</label>
+                    <div class="col-md-6 col-sm-6 ">
+                    <input id="middle-name" class="form-control" type="password" name="password">
+                    </div>
+                  </div>
 
-                     <table id="tabel-data" class="table table-responsive table-bordered table-striped table-hover dataTable no-footer" role="grid" aria-describedby="tabel-data_info" style="text-align: center; width: 100%; overflow-x:auto;" >
-                            <thead>
-                             <tr role="row">
-                                <th class="sorting_disabled" rowspan="1" colspan="1"  style="width: 100px;">No</th>
-
-                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">Alamat</th>
-                                @foreach($kriteria as $kt)
-                                     <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 298px;">{{$kt->nama}}</th>
-                                @endforeach
-
-                                <th class="sorting_disabled text-center" rowspan="1" colspan="1" style="width: 216px;">Action</th>
-                             </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-
-                                </tr>
-                            </tbody>
-
-                    </table>
-
+                  <div class="ln_solid"></div>
+                      <div class="item form-group">
+                      <div class="col-md-6 col-sm-6 offset-md-3">
+                      <button class="btn btn-primary" type="button">Cancel</button>
+                      <button class="btn btn-primary" type="reset">Reset</button>
+                      <button type="submit" class="btn btn-success">Submit</button>
+                      </div>
+                    </div>
+                </form>
                 </div>
-
-                @include('user.modal-input')
         </div>
 
 
-</div>
 @endsection
+
 
 @section('js')
 <script src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -85,34 +76,22 @@
 
 
 var table, save_method;
-
 $(function(){
-
-
-table = $('#tabel-data').DataTable({
+table = $('.table').DataTable({
      "processing" : true,
      "ajax" : {
        "url" : "{{ url('dataprofile') }}",
        "type" : "GET"
-     }
+     },
+     columns: [
+        { data: 0 },
+        { data: 1 },
+        { data: 2 },
+        { data: 3 },
+        { data: 4 },
+        { data: 5 }
+    ]
    });
-
-table2 = $('#tabel2').DataTable({
-     "processing" : true,
-     "ajax" : {
-       "url" : "{{ url('resultprofilematching') }}",
-       "type" : "GET"
-     }
-   });
-
-table2 = $('#tabel3').DataTable({
-     "processing" : true,
-     "ajax" : {
-       "url" : "{{ url('gapmapping') }}",
-       "type" : "GET"
-     }
-   });
-/*table =  $('#table-data').DataTable();*/
 
     $("input").change(function(){
         $(this).parent().parent().removeClass('has-error');
@@ -132,8 +111,8 @@ table2 = $('#tabel3').DataTable({
 
         var id = $('#id').val();
 
-         if(save_method == "add") url = "{{url('/profile-acuan')}}";
-         else url = "/profile-acuan/"+id;
+         if(save_method == "add") url = "{{url('/simpan')}}";
+         else url = "profile-user/"+id;
 
          $.ajax({
             url : url,
@@ -154,6 +133,7 @@ table2 = $('#tabel3').DataTable({
 
                }
                else{
+
 
                         $.each( data, function( key, value ) {
 
@@ -187,13 +167,12 @@ function add()
 
 function edit(id){
    save_method = "edit";
-   let uri = "{{url('data-profile-diingikan/')}}"
    $('input[name=_method]').val('PATCH');
-
+   //$('#form-tambah')[0].reset();
    $('.form-group').removeClass('has-error');
    $('.help-block').empty();
    $.ajax({
-     url : uri+"/"+id+"/edit",
+     url : "kriteria/"+id+"/edit",
      type : "GET",
      dataType : "JSON",
      success : function(data){
@@ -201,13 +180,9 @@ function edit(id){
        $('.modal-title').text('Edit Data');
 
        $('#id').val(data.id);
-        $('#nama_coffeeshop').val(data.nama_coffeeshop);
-       $('#nama').val(data.nama_lokasi);
-        $('#nilai').val(data.nilai);
-        let len = $('select#nilai').length ;
-        for(let i=0;i<len;i++){
-          $('select#nilai').find(`option[value="${data.nilai[i]}"]`).prop('selected', true);
-        }
+       $('#nama').val(data.nama);
+
+
      },
      error : function(){
        swal('Oops...','Gagal Menampilkan Data!','error');

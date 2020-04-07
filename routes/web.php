@@ -2,6 +2,7 @@
 
 use App\Lib\Mahasiswa;
 use App\Lib\ProfileMatching;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ Route::get('/teslib', function () {
     $pf = new ProfileMatching(0.6, 0.4);
     $pref = [5,4,5,4];
     $pac = [[5,6,4,5], [3,4,5,6], [5,6,4,5], [3,6,3,5]];
-    
+
     return response()->json(["result" => $pf->proces($pref, $pac)]);
 });
 
@@ -37,18 +38,21 @@ Auth::routes();
 
 //Route::auth();
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
 
     // Route::get('/', function() {
     //     return view('dashboard.index');
     // });
 
-     Route::get('/dashboard', function(){
+    Route::get('/dashboard', function () {
         return view('dashboard.index');
     });
 
-  
-   
+
+    Route::get('/profile', 'KriteriaController@index');
+
+
+
     Route::resource('individu', 'IndividuController');
     Route::get('individudata', 'IndividuController@listData');
 
@@ -61,36 +65,47 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('parameter_sub_kriteria', 'ParametersubkriteriaController');
     Route::get('parameter_sub_kriteriadata', 'ParametersubkriteriaController@listData');
 
-    Route::get('/user/home', function(){
-        return view('user/index');      
-        })->middleware('role:user');
+    Route::get('/user/home', function () {
+        return view('user/index');
+    })->middleware('role:user');
 
-    Route::get('/user/profile-acuan','FrontEndController@profileAcuan')->middleware('role:user');
+    Route::resource('/profile-acuan', 'ProfileAcuanController');
+    Route::get('/profile-acuan/{id}/detail', 'ProfileAcuanController@getDataProfileReferenceDetail');
+    Route::get('dataprofileacuan', 'ProfileAcuanController@getDataProfileReference');
 
-    Route::get('/user/data-profile-diingikan', 'FrontEndController@index' )->middleware('role:user');
-    Route::get('/user/data_perangkingan', 'FrontEndController@perangkingan' )->middleware('role:user');
-    Route::post('simpan', 'FrontEndController@save');
-    Route::post('simpan/{id}', 'FrontEndController@update');
+    Route::get('/user/data-profile-diingikan', 'FrontEndController@index')->middleware('role:user');
+    Route::get('/user/data_perangkingan', 'FrontEndController@perangkingan')->middleware('role:user');
+    // Route::post('simpan', 'FrontEndController@save');
+    // Route::post('simpan/{id}', 'FrontEndController@update');
+    //Route::get('profile-acuan/{id}/edit', 'FrontEndController@edit');
     Route::get('data-profile-diingikan/{id}/edit', 'FrontEndController@edit');
-    Route::get('dataprofile', 'FrontEndController@getDataProfile');
-    Route::get('dataprofileacuan', 'FrontEndController@getDataProfileReference');
-    Route::get('profile', 'FrontEndController@getProfile');
+    Route::get('dataprofile/{id}', 'FrontEndController@getDataProfile');
+
+    Route::resource('profile-user', 'UserController');
     Route::get('gapmapping', 'FrontEndController@gapMapping');
     Route::get('resultprofilematching', 'FrontEndController@resultProfileMatching');
+
+    Route::resource('profile-matching', 'ProfileMatchingController');
+    Route::post('profile-detail', 'ProfileMatchingController@storeDetail');
+    Route::patch('profile-detail/{id}', 'ProfileMatchingController@updateDetail');
+    Route::get('profile-matching/{id}/detail', 'FrontEndController@perangkingan');
+    Route::get('dataprofilematching', 'ProfileMatchingController@getDataProfileMatching');
+
+    Route::get('rankJson/{id}', 'FrontEndController@rankJson');
 });
 
 
 /*Route::group(['middleware' => ['auth', 'role:user']], function() {
 
      Route::get('/', function(){
-        return view('user/index');      
+        return view('user/index');
         });
 
      Route::get('/home', function(){
-        return view('user/index');      
+        return view('user/index');
         });
 
-    
+
 
 
 
@@ -99,10 +114,3 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 */
-
-
-   
-
- 
-
-

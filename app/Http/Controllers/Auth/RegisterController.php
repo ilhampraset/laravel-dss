@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use \DB;
 
 class RegisterController extends Controller
 {
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'individu';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -37,6 +39,11 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        return redirect('/login#signup');
     }
 
     /**
@@ -65,7 +72,17 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'username' => $data['username'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        $id_user = $this->create($data)->id;
+        DB::table('role_user')->insert(['user_id' => $id_user, 'role_id' => 2]);
+        return redirect($this->redirectPath());
     }
 }

@@ -17,11 +17,11 @@
      <link href="{{url('assets/vendors/animate.css/animate.min.css')}}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{('assets/build/css/custom.min.css')}}" rel="stylesheet">
-    
+
   </head>
 
   <body class="login">
-    
+
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
@@ -31,15 +31,15 @@
           <section class="login_content">
             <form method="POST" action="{{ route('login') }}">
             {{csrf_field()}}
-              <h1>Login Form</h1>
+              <h1>Login</h1>
               <div>
-                <input type="email" class="form-control" placeholder="email" name="email" required="" />
+                <input type="text" class="form-control" placeholder="username" name="username" required="" />
               </div>
               <div>
                 <input type="password" class="form-control" placeholder="Password" name="password" required="" />
               </div>
               <div>
-                
+
                  <button type="submit" class="btn btn-default">Submit</button>
                 <!-- <a class="reset_pass" href="#">Lost your password?</a> -->
               </div>
@@ -47,8 +47,9 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
+                <p class="change_link">
+                  <a href="#signup" class="to_register"> Register </a>
+                  <a href="{{url('/')}}" class="to_register"> Home</a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -61,16 +62,20 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
-              <h1>Create Account</h1>
+            <form method="POST" action="{{ route('register') }}" >
+              {{csrf_field()}}
+              <h1>Register</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" class="form-control" placeholder="Nama" name="name" required="" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input type="text" class="form-control" placeholder="Username" name="username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="email" class="form-control" placeholder="Email" name="email" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" name="password" required="" />
               </div>
               <div>
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -79,7 +84,7 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">Already a member ?
+                <p class="change_link">Sudah Pernah Register ?
                   <a href="#signin" class="to_register"> Log in </a>
                 </p>
 

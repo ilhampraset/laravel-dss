@@ -13,36 +13,52 @@
                      <input id="user" name="user" type="hidden" value="{{Auth::user()->id}}">
                         <input id="status" name="status" type="hidden" value='acuan'  >
                         <div class="form-group">
-                            <label class="col-md-4 col-sm-4 col-xs-12 control-label">Nama Lokasi</label>
+                            <label class="col-md-4 col-sm-4 col-xs-12 control-label">Nama Coffeeshop</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input id="nama_coffeeshop" name="nama_coffeeshop" class="required form-control input-xs" placeholder="Nama Coffeeshop " type="text" >
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4 col-xs-12 control-label">Alamat</label>
                             <div class="col-md-8 col-sm-8 col-xs-12">
                                 <input id="nama" name="nama" class="required form-control input-xs" placeholder="Nama " type="text" >
                                 <span class="help-block"></span>
                             </div>
                         </div>
                     </div>
-
                     @foreach($kriteria as $kt)
                     <div class="form-horizontal">
-                     <input id="id" name="id" type='hidden'>
+
                         <div class="form-group">
                             <label class="col-md-4 col-sm-4 col-xs-12 control-label">{{$kt->nama}}</label>
-                           
+
                             <div class="col-md-8 col-sm-8 col-xs-12">
-                              
-                                   <select  name='nilai[]'class='form-control input-xs'>
+
+                                   <select id="nilai" name='nilai[]'class='form-control input-xs'>
                                      @foreach($sub_kriteria as $skriteria)
                                      @if($skriteria->id_kriteria == $kt->id )
                                        <option value="{{$skriteria->id.' '.$kt->id }}"> {{$skriteria->nama.' ('.$skriteria->nilai.')'}}</option>
                                     @endif
                                     @endforeach
                                    </select>
-                               
+
                                 <span class="help-block"></span>
                             </div>
-                            
                         </div>
                     </div>
                     @endforeach
+
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-4 col-sm-4 col-xs-12 control-label">Foto</label>
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                <input id="image" name="image" class="required form-control input-xs" placeholder="Foto" type="file" >
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

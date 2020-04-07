@@ -26,25 +26,15 @@
     <!-- Custom Theme Style -->
     <link href="{{ url('assets/build/css/custom.min.css')}}" rel="stylesheet">
 
-    @yield('css')
+
 </head>
-  <body class="nav-md">
+  <body class="">
     <div class="container body">
       <div class="main_container">
 
 
 
-        <!--sidebar -->
-          <!-- sidebar menu -->
-          @component('components.sidebar')
-          @endcomponent
-        <!-- /sidebar menu -->
-
-          @component('components.topnav')
-          @endcomponent
-
-
-	   <div class="right_col" role="main">
+	   <div class="" role="main">
 
     	    <div class="row">
 		        <div class="col-md-12 col-sm-12 col-xs-12">
@@ -53,8 +43,7 @@
           	</div>
         </div>
 
-  		   @component('components.footer')
-      @endcomponent
+
 
        <script src="{{ asset('js/app.js') }}"></script>
        <script src="{{ url('assets/build/js/custom.min.js') }}"></script>

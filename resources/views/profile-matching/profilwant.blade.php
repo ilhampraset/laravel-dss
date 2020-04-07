@@ -208,6 +208,8 @@ function edit(id){
         for(let i=0;i<len;i++){
           $('select#nilai').find(`option[value="${data.nilai[i]}"]`).prop('selected', true);
         }
+
+
      },
      error : function(){
        swal('Oops...','Gagal Menampilkan Data!','error');

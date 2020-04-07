@@ -2,7 +2,7 @@
         <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
-            <nav> 
+            <nav>
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
 
@@ -11,6 +11,12 @@
                   <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li>
+                     <a href="{{ url('/profile-user') }}" >
+                          <i class="fa fa-user pull-right"></i>
+                          Profile
+                      </a>
+                    </li>
                     <li>
                      <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -23,7 +29,7 @@
                       </form>
                     </li>
                   </ul>
-                </li>  
+                </li>
               </ul>
             </nav>
           </div>
